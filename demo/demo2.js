@@ -3,12 +3,12 @@ import v3d from '../src';
 
 var scene = new v3d.Scene();
 
-scene.perspective = 600;
-scene.rotationX = 60;
-scene.rotationZ = 60;
+scene.perspective = 1300;
+scene.rotationX = 35;
+scene.rotationZ = 120;
 scene.backgroundColor = 'rgba(0, 0, 0, 1)';
 scene.setSize(window.innerWidth, window.innerHeight);
-scene.setPosition(0, 120, 0);
+scene.setPosition(-100, 100, 0);
 
 document.body.appendChild(scene.renderer.dom);
 
@@ -70,5 +70,7 @@ window.onmousemove = function (e) {
 }
 
 window.onmouseup = function (e) {
+  console.log(scene.rotationZ, scene.rotationX);
+  e.preventDefault();
   down = false
 }
