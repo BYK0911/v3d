@@ -47,13 +47,6 @@ class Coord {
 
     this.matrix(cos, 0, -sin, 0, 0, 1, 0, 0, sin, 0, cos, 0);
   }
-
-  perspect (near, z) {
-    let d = z - this.z;
-
-    this.x *= near / d;
-    this.y *= near / d;
-  }
 }
 
 export default function (x, y, z) {

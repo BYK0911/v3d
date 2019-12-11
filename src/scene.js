@@ -136,9 +136,9 @@ class Scene {
     coord.rotate(this.rotationZ);
     coord.rotateX(this.rotationX);
     coord.translate(this.x, -this.y); // 画布的y轴是向上的，与实际y轴方向相反；
-    let {x, y, z} = coord;
 
-    let k = (1 + z / this.perspective) * (this.width / this.perspective / 2);
+    let {x, y, z} = coord;
+    let k = this.width / this.perspective * (1 + z / this.perspective);
 
     return [x * k, y * k, z];
   }

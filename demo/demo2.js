@@ -6,7 +6,7 @@ var scene = new v3d.Scene();
 scene.perspective = 600;
 scene.rotationX = 60;
 scene.rotationZ = 60;
-scene.backgroundColor = 'rgba(200, 200, 200, .5)';
+scene.backgroundColor = 'rgba(0, 0, 0, 1)';
 scene.setSize(window.innerWidth, window.innerHeight);
 scene.setPosition(0, 120, 0);
 
@@ -30,12 +30,15 @@ scene.render();
 // }
 
 window.onmousewheel = function (e) {
-  let k = e.wheelDelta > 0 ? 1.1 : 1 / 1.1;
+  let k = e.wheelDelta < 0 ? 1.1 : 1 / 1.1;
   scene.perspective *= k;
 }
 
 let x = 0;
 let y = 0;
+
+let cx = window.innerWidth / 2;
+let cy = window.innerHeight / 2;
 let down = false;
 
 window.onmousedown = function (e) {
@@ -45,9 +48,22 @@ window.onmousedown = function (e) {
 }
 
 window.onmousemove = function (e) {
-  if (down) {
-    scene.x += e.pageX - x;
-    scene.y += e.pageY - y;
+  if (down && (e.pageX !== x || e.pageY !== y)) {
+    if (e.shiftKey) {
+      let [a, b] = [x - cx, y - cy];
+      let [c, d] = [e.pageX - cx, e.pageY - cy];
+      let boo = a * d > b * c;
+      let angle = Math.acos((a * c + b * d) / Math.sqrt(a * a + b * b) / Math.sqrt(c * c + d * d));
+      angle = angle / Math.PI * 180;
+      scene.rotationZ += boo ? angle : -angle;
+    } else if (e.metaKey) {
+      
+      scene.rotationX += e.pageY < y ? 5 : e.pageY > y ? -5 : 0;
+    } else {
+      scene.x += e.pageX - x;
+      scene.y += e.pageY - y;
+    }
+
     x = e.pageX;
     y = e.pageY;
   }
