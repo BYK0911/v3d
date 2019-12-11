@@ -70,7 +70,20 @@ window.onmousemove = function (e) {
 }
 
 window.onmouseup = function (e) {
-  console.log(scene);
   e.preventDefault();
+  console.log(scene);
   down = false
 }
+
+var d = document.createElement('div');
+d.innerHTML = '拖动移动图形位置；<br>按下Shift键拖动 延z轴旋转；<br>按下Command或Window键 延x轴旋转；';
+d.style.position = 'fixed';
+d.style.top = '0';
+d.style.left = '0';
+d.style.width = '100%';
+d.style.color = '#fff';
+d.style.fontSize = '12px';
+d.style.padding = '10px';
+d.style.textAlign = 'center';
+
+document.body.append(d);
