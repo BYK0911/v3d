@@ -30,6 +30,7 @@ scene.render();
 // }
 
 window.onmousewheel = function (e) {
+  e.preventDefault()
   let k = e.wheelDelta < 0 ? 1.1 : 1 / 1.1;
   scene.perspective *= k;
 }
