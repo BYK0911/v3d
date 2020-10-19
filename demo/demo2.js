@@ -29,7 +29,7 @@ scene.render();
 //   ani.playing ? ani.pause() : ani.play();
 // }
 
-window.onmousewheel = function (e) {
+scene.renderer.dom.onmousewheel = function (e) {
   e.preventDefault()
   let k = e.wheelDelta < 0 ? 1.1 : 1 / 1.1;
   scene.perspective *= k;
@@ -42,13 +42,13 @@ let cx = window.innerWidth / 2;
 let cy = window.innerHeight / 2;
 let down = false;
 
-window.onmousedown = function (e) {
+scene.renderer.dom.onmousedown = function (e) {
   down = true;
   x = e.pageX;
   y = e.pageY;
 }
 
-window.onmousemove = function (e) {
+scene.renderer.dom.onmousemove = function (e) {
   if (down && (e.pageX !== x || e.pageY !== y)) {
     if (e.shiftKey) {
       let [a, b] = [x - cx, y - cy];
@@ -70,9 +70,8 @@ window.onmousemove = function (e) {
   }
 }
 
-window.onmouseup = function (e) {
+scene.renderer.dom.onmouseup = function (e) {
   e.preventDefault();
-  console.log(scene);
   down = false
 }
 
